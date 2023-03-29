@@ -1,0 +1,8 @@
+Rows: 394 Columns: 5095
+-- Column specification ---------------------------------
+Delimiter: ","
+dbl (5095): CMV, GENDER, AGE, BMI, patient_ID, AARS, ...
+
+i Use `spec()` to retrieve the full column specification for this data.
+i Specify the column types or set `show_col_types = FALSE` to quiet this message.
+Error in saveRDS(., exnRDS) : object 'exnRDS' not found

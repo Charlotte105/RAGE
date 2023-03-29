@@ -21,3 +21,28 @@ patRDS <- path(cache,   "patients.rds")
 valRDS <- path(cache,   "validation.rds")
 trnRDS <- path(cache,   "training.rds")
 
+# Divert warning messages to a log file - open = "wt" means write a text file
+
+lf <- file(path(cache, "read_data_log.txt"), open = "wt")
+sink(lf, type = "message")
+
+# Download the series file from GEO. Save as serRDS
+
+if(!file.exists(datRDS) ) 
+  download.file(url, datRDS)
+
+# Extract patient characteristics
+
+read_csv(datRDS) %>%
+  select(id = patient_ID, cmv = CMV, gender = GENDER,
+         age = AGE, BMI) %>%
+  saveRDS(patRDS)
+
+# Look at gene expressions
+# 5090 genes for 394 patients
+
+read_csv(datRDS) %>%
+  select(everything(), id = patient_ID, -CMV, -GENDER,
+         -AGE, -BMI) %>%
+  saveRDS(exnRDS)
+
